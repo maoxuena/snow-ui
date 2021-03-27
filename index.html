@@ -1,77 +1,41 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>snow UI</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      --button-height: 32px;
-      --button-bg: white;
-      --button-active-bg: #eee;
-      --font-size: 14px;
-      --border-radius: 4px;
-      --color: #333;
-      --border-color: #999;
-      --border-color-hover: #666;
-    }
-
-    #app {
-      margin: 20px;
-    }
-
-    body {
-      font-size: var(--font-size);
-    }
-  </style>
-  <style>
-    .s-button {
-      font-size: var(--font-size);
-      height: var(--button-height);
-      padding: 0 1em;
-      font: inherit;
-      border-radius: var(--border-radius);
-      border: 1px solid var(--border-color);
-      background-color: var(--button-bg);
-    }
-
-    .s-button:hover {
-      border-color: var(--border-color-hover);
-      background-color: var(--button-bg);
-    }
-
-    .s-button:active {
-      background-color: var(--button-active-bg);
-    }
-
-    .s-button:focus {
-      outline: none;
-    }
-  </style>
-</head>
-
-<body>
-  <div id="app">
-    {{message}}
-    <s-button></s-button>
-  </div>
-  <script src="./node_modules/vue/dist/vue.min.js"></script>
-  <script src="./button.js"></script>
-  <script>
-    new Vue({
-      el: '#app',
-      data: {
-        message: 'snow UI'
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>snow UI</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
       }
-    })
-  </script>
-</body>
 
+      :root {
+        --button-height: 32px;
+        --button-bg: white;
+        --button-active-bg: #eee;
+        --font-size: 14px;
+        --border-radius: 4px;
+        --color: #333;
+        --border-color: #999;
+        --border-color-hover: #666;
+      }
+
+      #app {
+        margin: 20px;
+      }
+
+      body {
+        font-size: var(--font-size);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <s-button></s-button>
+    </div>
+    <script src="./src/app.js"></script>
+  </body>
 </html>
