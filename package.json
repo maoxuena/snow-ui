@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/maoxuena/snow-ui/issues"
   },
-  "homepage": "https://github.com/maoxuena/snow-ui#readme"
+  "homepage": "https://github.com/maoxuena/snow-ui#readme",
+  "dependencies": {
+    "vue": "^2.6.12"
+  }
 }
