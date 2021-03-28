@@ -35,10 +35,15 @@
 
 <body>
   <div id="app">
+    <s-icon name="download"></s-icon>
     <s-button :loading="loading" @click="loading=!loading">按钮</s-button>
     <s-button icon="settings" icon-position="left">按钮</s-button>
     <s-button icon="settings" icon-position="right">按钮</s-button>
-    <s-icon name="download"></s-icon>
+    <s-button-group>
+      <s-button icon="left" icon-position="left">向前</s-button>
+      <s-button>中间</s-button>
+      <s-button icon="right" icon-position="right">向后</s-button>
+    </s-button-group>
   </div>
   <script src="./src/app.js"></script>
   <script src="//at.alicdn.com/t/font_2450095_8xjgz1jp054.js"></script>
