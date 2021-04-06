@@ -15,7 +15,11 @@
 </template>
 
 <script>
+import Icon from './icon'
 export default {
+  components: {
+    's-icon': Icon
+  },
   props: {
     icon: {
       type: String,
