@@ -1,5 +1,7 @@
 # Vue UI 组件：snow-ui
 
+[![Build Status](https://www.travis-ci.com/maoxuena/snow-ui.svg?branch=main)](https://www.travis-ci.com/maoxuena/snow-ui)
+
 ## 介绍
 
 ## 开始使用
