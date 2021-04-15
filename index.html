@@ -1,50 +1,51 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>snow UI</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
 
-      :root {
-        --button-height: 32px;
-        --button-bg: white;
-        --button-active-bg: #eee;
-        --font-size: 14px;
-        --border-radius: 4px;
-        --color: #333;
-        --border-color: #999;
-        --border-color-hover: #666;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>snow UI</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-      #app {
-        margin: 20px;
-      }
+    :root {
+      --button-height: 32px;
+      --button-bg: white;
+      --button-active-bg: #eee;
+      --font-size: 14px;
+      --border-radius: 4px;
+      --color: #333;
+      --border-color: #999;
+      --border-color-hover: #666;
+    }
 
-      body {
-        font-size: var(--font-size);
-      }
-    </style>
-  </head>
+    #app {
+      margin: 20px;
+    }
 
-  <body>
-    <div id="app">
-      <s-icon name="download"></s-icon>
-      <s-button :loading="loading" @click="loading=!loading">按钮</s-button>
-      <s-button icon="settings" icon-position="left">按钮</s-button>
-      <s-button icon="settings" icon-position="right">按钮</s-button>
-      <s-button-group>
-        <s-button icon="left" icon-position="left">向前</s-button>
-        <s-button>中间</s-button>
-        <s-button icon="right" icon-position="right">向后</s-button>
-      </s-button-group>
-    </div>
-    <script src="./src/app.js"></script>
-    <script src="//at.alicdn.com/t/font_2450095_8xjgz1jp054.js"></script>
-  </body>
+    body {
+      font-size: var(--font-size);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <s-icon name="download"></s-icon>
+    <s-button :loading="loading" @click="loading=!loading">按钮</s-button>
+    <s-button icon="settings" icon-position="left">按钮</s-button>
+    <s-button icon="settings" icon-position="right">按钮</s-button>
+    <s-button-group>
+      <s-button icon="left" icon-position="left">向前</s-button>
+      <s-button>中间</s-button>
+      <s-button icon="right" icon-position="right">向后</s-button>
+    </s-button-group>
+  </div>
+  <script src="./src/app.js"></script>
+</body>
+
 </html>
