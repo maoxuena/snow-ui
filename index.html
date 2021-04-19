@@ -35,6 +35,10 @@
 
 <body>
   <div id="app">
+    <s-input value="snow"></s-input>
+    <s-input value="disabled" disabled></s-input>
+    <s-input value="readonly" readonly></s-input>
+    <s-input value="error" error="不能少于2个字"></s-input>
     <s-icon name="download"></s-icon>
     <s-button :loading="loading" @click="loading=!loading">按钮</s-button>
     <s-button icon="settings" icon-position="left">按钮</s-button>

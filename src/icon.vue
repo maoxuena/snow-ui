@@ -7,6 +7,7 @@
 <script>
 import './svg'
 export default {
+  name: 'SnowIcon',
   props: ['name']
 }
 </script>
