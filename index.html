@@ -31,13 +31,41 @@
       font-size: var(--font-size);
     }
   </style>
+  <style>
+    .box{
+      border: 1px solid red;
+    }
+  </style>
 </head>
 
 <body>
   <div id="app">
-    <s-row>
-      <s-col span="6"></s-col>
-      <s-col span="18"></s-col>
+    <s-row gutter="20">
+      <s-col span="6">
+        <div class="box">6</div>
+      </s-col>
+      <s-col span="16" offset="2">
+        <div class="box">16</div>
+      </s-col>
+    </s-row>
+    <s-row gutter="20">
+      <s-col span="6">
+        <div class="box">6</div>
+      </s-col>
+      <s-col span="2">
+        <div class="box">2</div>
+      </s-col>
+      <s-col span="16">
+        <div class="box">16</div>
+      </s-col>
+    </s-row>
+    <s-row gutter="20">
+      <s-col span="8">
+        <div class="box">8</div>
+      </s-col>
+      <s-col span="16">
+        <div class="box">16</div>
+      </s-col>
     </s-row>
     <s-input value="snow" v-model="message"></s-input>
     <s-button icon="forward" icon-position="left" @click="message+=1">+1</s-button>
