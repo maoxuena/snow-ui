@@ -35,6 +35,10 @@
 
 <body>
   <div id="app">
+    <s-row>
+      <s-col span="6"></s-col>
+      <s-col span="18"></s-col>
+    </s-row>
     <s-input value="snow" v-model="message"></s-input>
     <s-button icon="forward" icon-position="left" @click="message+=1">+1</s-button>
     <p>{{message}}</p>
