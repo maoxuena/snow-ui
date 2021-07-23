@@ -35,6 +35,9 @@
 
 <body>
   <div id="app">
+    <s-input value="snow" v-model="message"></s-input>
+    <s-button icon="forward" icon-position="left" @click="message+=1">+1</s-button>
+    <p>{{message}}</p>
     <s-input value="snow" @change="inputChange"></s-input>
     <s-input value="disabled" disabled></s-input>
     <s-input value="readonly" readonly></s-input>
