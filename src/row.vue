@@ -1,36 +1,38 @@
 <template>
-  <div class="row" :class="rowClass" :style="rowStyle">
+  <div class="row"
+       :class="rowClass"
+       :style="rowStyle">
     <slot></slot>
   </div>
 </template>
 <script>
 export default {
-  name:'SnowRow',
+  name: 'SnowRow',
   props: {
     gutter: {
       type: [Number, String]
     },
     align: {
       type: String,
-      validator(value){
-        return ['left','center','right']
+      validator (value) {
+        return ['left', 'center', 'right']
       }
     }
   },
-  computed:{
-    rowClass(){
+  computed: {
+    rowClass () {
       let { align } = this
       return [align && `align-${align}`]
     },
-    rowStyle(){
+    rowStyle () {
       let { gutter } = this
       return {
-        marginLeft: -gutter / 2 + 'px', 
+        marginLeft: -gutter / 2 + 'px',
         marginRight: -gutter / 2 + 'px'
       }
     }
   },
-  mounted(){
+  mounted () {
     this.$children.forEach((vm) => {
       vm.gutter = this.gutter
     })
@@ -38,18 +40,19 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.row{
+.row {
   display: flex;
+  flex-wrap: wrap;
 
-  &.align-left{
+  &.align-left {
     justify-content: flex-start;
   }
 
-  &.align-center{
+  &.align-center {
     justify-content: center;
   }
 
-  &.align-right{
+  &.align-right {
     justify-content: flex-end;
   }
 }
