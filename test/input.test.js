@@ -6,12 +6,9 @@ Vue.config.productionTip = false
 Vue.config.devtools = false
 
 describe('Input', () => {
-
   it('存在.', () => {
     expect(Input).to.exist
   })
-
-
   describe('props', () => {
     const Constructor = Vue.extend(Input)
     let vm
