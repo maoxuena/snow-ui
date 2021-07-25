@@ -40,6 +40,27 @@
 
 <body>
   <div id="app">
+    <s-layout style="height: 200px;">
+      <s-header>header</s-header>
+      <s-content>content</s-content>
+      <s-footer>footer</s-footer>
+    </s-layout>
+    <s-layout style="height: 200px;">
+      <s-header>header</s-header>      
+      <s-layout>
+        <s-sider>sider</s-sider>
+        <s-content>content</s-content>
+      </s-layout>      
+      <s-footer>footer</s-footer>
+    </s-layout>    
+    <s-layout style="height: 200px;">     
+      <s-sider>sider</s-sider>
+      <s-layout>
+         <s-header>header</s-header> 
+        <s-content>content</s-content>
+        <s-footer>footer</s-footer>
+      </s-layout>      
+    </s-layout>
     <s-row gutter="20" align="center">
       <s-col span="24" :ipad="{span:12}" :narrow-pc="{span:8}" :pc="{span:6}" :wide-pc="{span:4}">
         <div class="box">6</div>
