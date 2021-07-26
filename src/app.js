@@ -40,7 +40,16 @@ new Vue({
       console.log(e.target.value)
     },
     showToast(){
-      this.$toast('show toast')
+      this.$toast('<p>show toast!</p><i>倾斜了</i>', {
+        enableHtml: true,
+        closeButton: {
+          text:'知道了', 
+          callback(toast){
+            toast.log()
+            console.log('ok')
+          }
+        }
+      })
     }
   },
 })
