@@ -53,7 +53,9 @@
 
 <body>
   <div id="app">
-    <button @click="showToast">show toast</button>
+    <button @click="showToast('top')">show toast top</button>
+    <button @click="showToast('middle')">show toast middle</button>
+    <button @click="showToast('bottom')">show toast bottom</button>
     <s-layout style="height: 200px;">
       <s-header>header</s-header>
       <s-content>content</s-content>

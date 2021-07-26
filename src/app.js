@@ -39,8 +39,9 @@ new Vue({
     inputChange (e) {
       console.log(e.target.value)
     },
-    showToast(){
+    showToast(position){
       this.$toast('<p>show toast!</p><i>倾斜了</i>', {
+        position,
         enableHtml: true,
         closeButton: {
           text:'知道了', 
