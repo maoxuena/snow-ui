@@ -6,12 +6,7 @@
 <script>
   export default {
     name: 'SnowTabsBody',
-    inject: ['eventBus'],
-    created(){
-      this.eventBus.$on('update:selected', (name) => {
-        console.log(name)
-      })
-    }
+    inject: ['eventBus']
   }
 </script>
 <style>
