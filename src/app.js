@@ -42,11 +42,12 @@ new Vue({
     showToast(position){
       this.$toast('<p>show toast!</p><i>倾斜了</i>', {
         position,
+        autoClose: 3,
         enableHtml: true,
         closeButton: {
           text:'知道了', 
           callback(toast){
-            toast.log()
+            console.loh(toast)
             console.log('ok')
           }
         }
