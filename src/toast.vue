@@ -49,7 +49,7 @@ export default {
     }
   },
   mounted(){
-    this.execAutoClose()
+    // this.execAutoClose()
     this.updateStyles()
   },
   computed: {
@@ -74,6 +74,7 @@ export default {
     },
     close(){
       this.$el.remove()
+      this.$emit('close')
       this.$destroy
     },
     log(){
@@ -92,6 +93,18 @@ export default {
 $font-size: 14px;
 $toast-min-height: 40px;
 $toast-bg: rgba(0, 0, 0, 0.75);
+@keyframes fade-top-in{
+  0% {opacity: 0; transform: translate(-50%, -100%);}
+  100% {opacity: 1; transform: translate(-50%, 0);}
+}
+@keyframes fade-middle-in{
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+@keyframes fade-bottom-in{
+  0% {opacity: 0; transform: translate(-50%, 100%);}
+  100% {opacity: 1; transform: translate(-50%, 0);}
+}
 .toast {
   font-size: $font-size; 
   min-height: $toast-min-height; 
@@ -121,18 +134,21 @@ $toast-bg: rgba(0, 0, 0, 0.75);
   }
 
   &.position-top{
+    animation: fade-top-in 1s;
     top: 0; 
-    transform: translateX(-50%); 
+    transform: translateX(-50%);
   }
 
   &.position-middle{
+    animation: fade-middle-in 1s;
     top: 50%; 
     transform: translate(-50%, -50%);
   }
 
   &.position-bottom{
+    animation: fade-bottom-in 1s;
     bottom: 0; 
-    transform: translateX(-50%); 
+    transform: translateX(-50%);
   }
 }
 </style>
