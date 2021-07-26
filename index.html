@@ -53,6 +53,22 @@
 
 <body>
   <div id="app">
+    <!-- <s-tabs :selected="selectedTab" @update:selected="selectedTab = $event"> -->
+    <s-tabs :selected.sync="selectedTab">
+      <s-tabs-head>
+        <template slot="actions">
+          <button>设置</button>
+        </template>
+        <s-tabs-item name="tab1"><s-icon name="settings"></s-icon>娱乐</s-tabs-item>
+        <s-tabs-item name="tab2">游戏</s-tabs-item>
+        <s-tabs-item name="tab3" disabled>美食</s-tabs-item>
+      </s-tabs-head>
+      <s-tabs-body>
+        <s-tabs-pane name="tab1">娱乐相关</s-tabs-pane>
+        <s-tabs-pane name="tab2">游戏相关</s-tabs-pane>
+        <s-tabs-pane name="tab3">美食相关</s-tabs-pane>
+      </s-tabs-body>
+    </s-tabs>
     <button @click="showToast('top')">show toast top</button>
     <button @click="showToast('middle')">show toast middle</button>
     <button @click="showToast('bottom')">show toast bottom</button>

@@ -12,6 +12,11 @@ import Content from './content'
 import Footer from './footer'
 import Toast from './toast'
 import plugin from './plugin'
+import Tabs from './tabs'
+import TabsHead from './tabs-head'
+import TabsBody from './tabs-body'
+import TabsItem from './tabs-item'
+import TabsPane from './tabs-pane'
 
 Vue.component('s-button', Button)
 Vue.component('s-button-group', ButtonGroup)
@@ -26,12 +31,18 @@ Vue.component('s-content', Content)
 Vue.component('s-footer', Footer)
 Vue.component('s-toast', Toast)
 Vue.use(plugin)
+Vue.component('s-tabs', Tabs)
+Vue.component('s-tabs-head', TabsHead)
+Vue.component('s-tabs-body', TabsBody)
+Vue.component('s-tabs-item', TabsItem)
+Vue.component('s-tabs-pane', TabsPane)
 
 new Vue({
   el: '#app',
   data: {
     loading: false,
-    message: 'hi'
+    message: 'hi',
+    selectedTab: 'tab1',
   },
   created(){
   },
