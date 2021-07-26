@@ -44,7 +44,6 @@ export default {
       type:String,
       default:'top',
       validator(value){
-        console.log(value)
         return ['top', 'bottom', 'middle'].indexOf(value) >= 0
       }
     }

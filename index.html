@@ -54,7 +54,7 @@
 <body>
   <div id="app">
     <!-- <s-tabs :selected="selectedTab" @update:selected="selectedTab = $event"> -->
-    <s-tabs :selected.sync="selectedTab">
+    <s-tabs :selected.sync="selectedTab" @update:selected="yyy">
       <s-tabs-head>
         <template slot="actions">
           <button>设置</button>
