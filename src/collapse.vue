@@ -13,7 +13,7 @@ export default {
       default: false
     },
     selected: {
-      type: String,
+      type: Array,
     }
   },
   data () {
@@ -26,8 +26,35 @@ export default {
       eventBus: this.eventBus
     }
   },
+  methods: {
+    addSelected () {
+      this.eventBus.$on('update:addSelected', (name) => {
+        let selectedCopy = JSON.parse(JSON.stringify(this.selected))
+        if (this.single) {
+          selectedCopy = [name]
+        } else {
+          selectedCopy.push(name)
+        }
+        this.selectedEven(selectedCopy)
+      })
+    },
+    removeSelected () {
+      this.eventBus.$on('update:removeSelected', (name) => {
+        let selectedCopy = JSON.parse(JSON.stringify(this.selected))
+        let index = selectedCopy.indexOf(name)
+        selectedCopy.splice(index, 1)
+        this.selectedEven(selectedCopy)
+      })
+    },
+    selectedEven (selectedCopy) {
+      this.eventBus.$emit('update:selected', selectedCopy)
+      this.$emit('update:selected', selectedCopy)
+    }
+  },
   mounted () {
     this.eventBus.$emit('update:selected', this.selected)
+    this.addSelected()
+    this.removeSelected()
   }
 }
 </script>

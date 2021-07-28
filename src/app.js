@@ -49,24 +49,25 @@ new Vue({
     loading: false,
     message: 'hi',
     selectedTab: 'tab1',
+    selectedTabSingle: ['1', '3'],
   },
-  created(){
+  created () {
   },
   methods: {
-    yyy(){
+    yyy () {
       console.log('yyy')
     },
     inputChange (e) {
       console.log(e.target.value)
     },
-    showToast(position){
+    showToast (position) {
       this.$toast('<p>show toast!</p><i>倾斜了</i>', {
         position,
         autoClose: 3,
         enableHtml: true,
         closeButton: {
-          text:'知道了', 
-          callback(toast){
+          text: '知道了',
+          callback (toast) {
             console.loh(toast)
             console.log('ok')
           }
