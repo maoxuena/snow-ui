@@ -76,13 +76,17 @@
     <div @click="yyy" style="overflow: hidden; border: 2px solid red; padding:50px 100px;">
       <s-popover position="bottom">
         <template slot="content">
-          <div>po</div>
+          <div>po            
+            <s-button>关闭</s-button>
+          </div>
         </template>
         <s-button>点击 bottom</s-button>
       </s-popover>
       <s-popover>
-        <template slot="content">
+        <template slot="content" slot-scope="{close}">
+          <h6>title</h6>
           <div>popover内容popover内容popover内容popover内容popover内容popover内容popover内容popover内容</div>
+          <s-button @click="close">关闭</s-button>
         </template>
         <s-button>点击 top</s-button>
       </s-popover>
