@@ -4,12 +4,12 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'SnowTabsBody',
-    inject: ['eventBus']
-  }
+export default {
+  name: 'SnowTabsBody',
+  inject: ['eventBus']
+}
 </script>
 <style>
-  .tabs-body {
-  }
+.tabs-body {
+}
 </style> 

@@ -1,24 +1,24 @@
 <template>
   <div class="wrapper"
-       :class="toastClasses" >
-    <div class="toast" 
-        ref="toast">
+       :class="toastClasses">
+    <div class="toast"
+         ref="toast">
       <div class="message">
         <slot v-if="!enableHtml"></slot>
-        <div v-else 
-            v-html="$slots.default[0]"></div>
+        <div v-else
+             v-html="$slots.default[0]"></div>
       </div>
-      <div class="line" 
-          ref="line"></div>
-      <span class="close" 
-            v-if="closeButton" 
+      <div class="line"
+           ref="line"></div>
+      <span class="close"
+            v-if="closeButton"
             @click="onClickClose">{{closeButton.text}}</span>
     </div>
   </div>
 </template>
 <script>
 export default {
-  name:'SnowToast',
+  name: 'SnowToast',
   props: {
     autoClose: {
       type: [Boolean, Number],
@@ -31,7 +31,7 @@ export default {
       type: Object,
       default () {
         return {
-          text: '关闭', 
+          text: '关闭',
           callback: undefined
         }
       }
@@ -41,25 +41,25 @@ export default {
       default: false
     },
     position: {
-      type:String,
-      default:'top',
-      validator(value){
+      type: String,
+      default: 'top',
+      validator (value) {
         return ['top', 'bottom', 'middle'].indexOf(value) >= 0
       }
     }
   },
-  mounted(){
+  mounted () {
     this.execAutoClose()
     this.updateStyles()
   },
   computed: {
-    toastClasses(){
+    toastClasses () {
       return {
-        [`position-${this.position}`]:true
+        [`position-${this.position}`]: true
       }
     }
   },
-  methods:{
+  methods: {
     updateStyles () {
       this.$nextTick(() => {
         this.$refs.line.style.height = `${this.$refs.toast.getBoundingClientRect().height}px`
@@ -72,7 +72,7 @@ export default {
         }, this.autoClose * 1000)
       }
     },
-    close(){
+    close () {
       this.$el.remove()
       this.$emit('close')
       this.$destroy
@@ -91,46 +91,62 @@ $font-size: 14px;
 $toast-min-height: 40px;
 $toast-bg: rgba(0, 0, 0, 0.75);
 $animation-duration: 300ms;
-@keyframes slide-down{
-  0% {opacity: 0; transform: translateY(-100%);}
-  100% {opacity: 1; transform: translateY(0);}
+@keyframes slide-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-@keyframes fade-in{
-  0% {opacity: 0;}
-  100% {opacity: 1;}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
-@keyframes slide-up{
-  0% {opacity: 0; transform: translateY(100%);}
-  100% {opacity: 1; transform: translateY(0);}
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-.wrapper{
+.wrapper {
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
 
-  &.position-top{
-    top: 0; 
+  &.position-top {
+    top: 0;
 
-    .toast{
+    .toast {
       animation: slide-down $animation-duration;
       border-top-left-radius: 0;
       border-top-right-radius: 0;
     }
   }
 
-  &.position-middle{
-    top: 50%; 
+  &.position-middle {
+    top: 50%;
     transform: translate(-50%, -50%);
 
-    .toast{
+    .toast {
       animation: fade-in $animation-duration;
     }
   }
 
-  &.position-bottom{
-    bottom: 0; 
+  &.position-bottom {
+    bottom: 0;
 
-    .toast{
+    .toast {
       animation: slide-up $animation-duration;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
@@ -138,15 +154,15 @@ $animation-duration: 300ms;
   }
 }
 .toast {
-  font-size: $font-size; 
-  min-height: $toast-min-height; 
+  font-size: $font-size;
+  min-height: $toast-min-height;
   line-height: 1.8;
   display: flex;
   color: white;
   align-items: center;
   background: $toast-bg;
   border-radius: 4px;
-  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.50);
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
   padding: 0 16px;
 
   .message {
@@ -157,7 +173,7 @@ $animation-duration: 300ms;
     padding-left: 16px;
     flex-shrink: 0;
   }
-  
+
   .line {
     border-left: 1px solid #666;
     margin-left: 16px;
