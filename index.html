@@ -72,19 +72,31 @@
         <s-tabs-pane name="tab3">美食相关</s-tabs-pane>
       </s-tabs-body>
     </s-tabs>
-    <div style="height: 1000px;"></div>
-    <div @click="yyy" style="overflow: hidden; border: 2px solid red; margin-left: 600px; width: 200px;">
-      <s-popover>
+    <div style="height: 600px;"></div>
+    <div @click="yyy" style="overflow: hidden; border: 2px solid red; padding:50px 100px;">
+      <s-popover position="bottom">
         <template slot="content">
-          <div>popoverpopoverpopoverpopover popover内容popover内容popover内容popover内容popover内容</div>
+          <div>po</div>
         </template>
-        <s-button>点我</s-button>
+        <s-button>点我bottom</s-button>
       </s-popover>
       <s-popover>
         <template slot="content">
           <div>popover内容popover内容popover内容popover内容popover内容popover内容popover内容popover内容</div>
         </template>
-        <s-button>点我</s-button>
+        <s-button>点我top</s-button>
+      </s-popover>
+      <s-popover position="left">
+        <template slot="content">
+          <div>popoverpopoverpopoverpopover popover内容popover内容popover内容popover内容popover内容</div>
+        </template>
+        <s-button>点我left</s-button>
+      </s-popover>
+      <s-popover position="right">
+        <template slot="content">
+          <div>popoverpopoverpopoverpopover popover内容popover内容popover内容popover内容popover内容</div>
+        </template>
+        <s-button>点我right</s-button>
       </s-popover>
     </div>
     <button @click="showToast('top')">show toast top</button>
