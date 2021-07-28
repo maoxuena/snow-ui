@@ -49,9 +49,8 @@ new Vue({
   created(){
   },
   methods: {
-    yyy(data){
+    yyy(){
       console.log('yyy')
-      console.log(data)
     },
     inputChange (e) {
       console.log(e.target.value)

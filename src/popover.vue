@@ -1,10 +1,10 @@
 <template>
-  <div class="popover" 
-       @click.stop="xxx">
+  <div ref="popover"
+       class="popover" 
+       @click="onClick">
     <div ref="contentWrapper" 
          class="content-wrapper" 
-         v-if="visible" 
-         @click.stop>
+         v-if="visible">
       <slot name="content"></slot>
     </div>
     <span ref="triggerWrapper">      
@@ -22,23 +22,43 @@
       }
     },
     methods: {
-      xxx () {
-        this.visible = !this.visible
-        if (this.visible === true) {
-          this.$nextTick(() => {   
-            document.body.appendChild(this.$refs.contentWrapper) 
-            let {width, height, top, left} = this.$refs.triggerWrapper.getBoundingClientRect()
-            console.log(width, height, top, left)
-            this.$refs.contentWrapper.style =`
-              left: ${left + window.scrollX + width/2}px; 
-              top: ${top + window.scrollY}px;
-            `
-            let eventHandler = () => {
-              this.visible = false
-              document.removeEventListener('click', eventHandler)
-            }
-            document.addEventListener('click', eventHandler)
-          })
+      positionContent(){
+        document.body.appendChild(this.$refs.contentWrapper) 
+        let {width, height, top, left} = this.$refs.triggerWrapper.getBoundingClientRect()
+        this.$refs.contentWrapper.style =`
+          left: ${left + window.scrollX + width/2}px; 
+          top: ${top + window.scrollY}px;
+        `
+      },
+      onClickDocument(e){
+        if (
+          this.$refs.contentWrapper.contains(e.target) || 
+          this.$refs.popover && 
+          (this.$refs.popover === e.target || this.$refs.popover.contains(e.target))
+        ) { 
+          return 
+        }
+        this.close()
+      },
+      open(){
+        this.visible = true
+        this.$nextTick(() => {   
+          this.positionContent()
+          document.addEventListener('click', this.onClickDocument)
+        })
+      },
+      close () {
+        console.log('关闭')
+        this.visible = false
+        document.removeEventListener('click', this.onClickDocument)
+      },
+      onClick (event) {        
+        if (this.$refs.triggerWrapper.contains(event.target)) {
+          if (this.visible === true) {
+            this.close()
+          } else {
+            this.open()
+          }
         }
       }
     },
