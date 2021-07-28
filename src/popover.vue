@@ -7,7 +7,7 @@
          v-if="visible">
       <slot name="content"></slot>
     </div>
-    <span ref="triggerWrapper">      
+    <span ref="triggerWrapper" style="display: inline-block;">      
       <slot></slot>
     </span>
   </div>
@@ -31,11 +31,10 @@
         `
       },
       onClickDocument(e){
-        if (
-          this.$refs.contentWrapper.contains(e.target) || 
-          this.$refs.popover && 
-          (this.$refs.popover === e.target || this.$refs.popover.contains(e.target))
-        ) { 
+        if (this.$refs.popover && (this.$refs.popover === e.target || this.$refs.popover.contains(e.target))) { 
+          return 
+        }
+        if (this.$refs.contentWrapper && (this.$refs.contentWrapper === e.target || this.$refs.contentWrapper.contains(e.target))) { 
           return 
         }
         this.close()
@@ -48,7 +47,6 @@
         })
       },
       close () {
-        console.log('关闭')
         this.visible = false
         document.removeEventListener('click', this.onClickDocument)
       },
@@ -66,6 +64,9 @@
 </script>
 
 <style lang="scss" scoped>
+  $border-color: #ebeef5;
+  $border-radius: 4px;
+  $popover-background-color: #fff;
   .popover {
     display: inline-block;
     vertical-align: top;
@@ -74,11 +75,35 @@
 
   .content-wrapper {
     position: absolute;
+    margin-top: -16px;
     transform: translate(-50%, -100%);
-    padding: 18px 20px;
-    border: 1px solid #ebeef5;
-    border-radius: 4px;
-    background: #fff;
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    padding: 1em 1.5em;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    background-color:  $popover-background-color;
+    // box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.1));
+    background: white;
+    max-width: 20em;
+    word-break: break-all;
+
+    &::before, &::after {
+      content: '';
+      display: block;
+      border: 10px solid transparent;
+      width: 0;
+      height: 0;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
     }
+    &::before {
+      border-top-color: $border-color;
+      top: 100%;
+    }
+    &::after {
+      border-top-color:  $popover-background-color;
+      top: calc(100% - 1px);
+    }
+  }
 </style> 
