@@ -35,30 +35,15 @@
       positionContent(){
         const { contentWrapper, triggerWrapper } = this.$refs
         document.body.appendChild(contentWrapper) 
-        let {width, height, top, left} = triggerWrapper.getBoundingClientRect()
-        if(this.position === 'top'){
-          contentWrapper.style =`
-            left: ${left + window.scrollX + width/2}px; 
-            top: ${top + window.scrollY}px;
-          `
-        }else if(this.position === 'bottom'){
-          contentWrapper.style =`
-            left: ${left + window.scrollX + width/2}px; 
-            top: ${top + window.scrollY + height}px;
-          `
-        }else if(this.position === 'left'){
-          let {height: contentHeight} = contentWrapper.getBoundingClientRect()
-          contentWrapper.style =`
-            left: ${left + window.scrollX}px; 
-            top: ${top + window.scrollY + (height - contentHeight)/2}px;
-          `
-        }else if(this.position === 'right'){
-          let {height: contentHeight} = contentWrapper.getBoundingClientRect()
-          contentWrapper.style =`
-            left: ${left + window.scrollX + width}px; 
-            top: ${top + window.scrollY + (height - contentHeight)/2}px;
-          `
+        const {width, height, top, left} = triggerWrapper.getBoundingClientRect()
+        const {height: contentHeight} = contentWrapper.getBoundingClientRect()
+        let positions = {
+          top: { top: top + window.scrollY, left: left + window.scrollX + width/2 },
+          bottom: { top: top + window.scrollY + height, left: left + window.scrollX + width/2 },
+          left: { top:top + window.scrollY + (height - contentHeight)/2, left:left + window.scrollX },
+          right: { top:top + window.scrollY + (height - contentHeight)/2, left:left + window.scrollX + width }
         }
+        contentWrapper.style = `top: ${positions[this.position].top}px; left: ${positions[this.position].left}px;`
       },
       onClickDocument(e){
         if (this.$refs.popover && (this.$refs.popover === e.target || this.$refs.popover.contains(e.target))) { 
