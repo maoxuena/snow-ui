@@ -78,25 +78,25 @@
         <template slot="content">
           <div>po</div>
         </template>
-        <s-button>点我bottom</s-button>
+        <s-button>点击 bottom</s-button>
       </s-popover>
       <s-popover>
         <template slot="content">
           <div>popover内容popover内容popover内容popover内容popover内容popover内容popover内容popover内容</div>
         </template>
-        <s-button>点我top</s-button>
+        <s-button>点击 top</s-button>
       </s-popover>
-      <s-popover position="left">
+      <s-popover position="left" trigger="hover">
         <template slot="content">
           <div>popoverpopoverpopoverpopover popover内容popover内容popover内容popover内容popover内容</div>
         </template>
-        <s-button>点我left</s-button>
+        <s-button>上移 left</s-button>
       </s-popover>
-      <s-popover position="right">
+      <s-popover position="right" trigger="hover">
         <template slot="content">
           <div>popoverpopoverpopoverpopover popover内容popover内容popover内容popover内容popover内容</div>
         </template>
-        <s-button>点我right</s-button>
+        <s-button>上移 right</s-button>
       </s-popover>
     </div>
     <button @click="showToast('top')">show toast top</button>
