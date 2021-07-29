@@ -1,7 +1,8 @@
 <template>
   <div class="collapseItem">
     <div class="title"
-         @click="toggle">
+         @click="toggle" 
+         :data-name="name">
       {{title}}
     </div>
     <div class="content"
@@ -32,7 +33,6 @@ export default {
   inject: ['eventBus'],
   methods: {
     toggle () {
-      console.log(this.open, this.name)
       if (this.open) {
         this.eventBus && this.eventBus.$emit('update:removeSelected', this.name)
       } else {
