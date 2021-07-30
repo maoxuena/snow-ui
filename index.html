@@ -72,6 +72,7 @@
         <s-tabs-pane name="tab3">美食相关</s-tabs-pane>
       </s-tabs-body>
     </s-tabs>
+    <s-cascader :source="source"></s-cascader>
     <div id="app" style="padding: 100px;">
       <p>single 当前选中{{selectedTabSingle}}</p>
       <s-collapse single :selected.sync="selectedTabSingle">
