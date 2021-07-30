@@ -1,13 +1,15 @@
 <template>
   <div class="cascader-item">
-    {{sourceItem.name}}
-    <template v-if="sourceItem.children">
-      <snow-cascader-item
-        v-for="(item, key) in sourceItem.children"
-        :sourceItem="item"
-        :key="key"
-      ></snow-cascader-item>
-    </template>
+    <div class="left">
+      <div class="label" v-for="(item,index) in items" 
+           :key="index"
+           @click="leftSelected = item">
+        {{item.name}}
+      </div>
+    </div>
+    <div class="right" v-if="rightItems">
+      <snow-cascader-item :items="rightItems"></snow-cascader-item>
+    </div>
   </div>
 </template>
 
@@ -15,16 +17,35 @@
   export default {
     name: "SnowCascaderItem",
     props: {
-      sourceItem: {
-        type: Object
+      items: {
+        type: Array
+      }
+    },
+    data () {
+      return {
+        leftSelected: null
+      }
+    },
+    computed: {
+      rightItems () {
+        return this.leftSelected?.children
       }
     }
   }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
   .cascader-item {
-    border: 1px solid red;
-    margin: 10px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    .left {
+      border: 1px solid red;
+    }
+    
+    .right {
+      margin-top: -1px;
+    }
   }
 </style>
