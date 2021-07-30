@@ -7,6 +7,8 @@ $font-size: 14px;
 $border-radius: 4px;
 $border-color: #ebeef5;
 $border-color-hover: #999;
+$border-color-light: #e4e7ed;
+// $border-color-light: lighten($border-color, 25%);
 
 $grey: #ddd;
 $red: #f1453d;
@@ -26,3 +28,7 @@ $box-shadow-color: rgba(0, 0, 0, 0.5);
 $popover-background-color: #fff;
 
 $tab-height: 40px;
+
+.box-shadow {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}

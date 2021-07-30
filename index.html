@@ -72,7 +72,9 @@
         <s-tabs-pane name="tab3">美食相关</s-tabs-pane>
       </s-tabs-body>
     </s-tabs>
-    <s-cascader :source="source"></s-cascader>
+    <p>联级选择</p>
+    <s-cascader :source="source" popover-height="200px"></s-cascader>
+    <p>联级选择</p>
     <div id="app" style="padding: 100px;">
       <p>single 当前选中{{selectedTabSingle}}</p>
       <s-collapse single :selected.sync="selectedTabSingle">
