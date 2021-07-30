@@ -10,11 +10,7 @@
   </div>
 </template>
 <script>
-  import Button from '../../../src/button'
   export default {
-    components: {
-      's-button': Button
-    },
     data () {
       return {
         content: `
@@ -24,6 +20,11 @@
           <s-button disabled>默认按钮</s-button>
         `
       }
+    },
+    mounted () {
+      import('../../../src/button').then(module => {      
+        Vue.component('s-button', module.SnowButton)
+      })
     }
   }
 </script> 
