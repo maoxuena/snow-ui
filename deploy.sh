@@ -21,6 +21,6 @@ git commit -m 'deploy'
 
 # 如果发布到 https://<USERNAME>.github.io/<REPO>
 # git push -f git@github.com:<USERNAME>/<REPO>.git master:gh-pages
-git push -f git@github.com:maoxuena/snow-ui.git main:snow-ui-pages
+git push -f git@github.com:maoxuena/snow-ui.git master:snow-ui-pages
 
 cd -
