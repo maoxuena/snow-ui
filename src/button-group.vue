@@ -19,7 +19,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$border-radius: 4px;
+@import "var";
+
 .s-button-group {
   display: inline-flex;
   vertical-align: middle;

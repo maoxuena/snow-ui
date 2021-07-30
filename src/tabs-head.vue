@@ -23,8 +23,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-$tab-height: 40px;
-$blue: blue;
+@import "var";
+
 .tabs-head {
   display: flex;
   height: $tab-height;
