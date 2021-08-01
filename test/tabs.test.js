@@ -48,4 +48,4 @@ describe('Tabs', () => {
   it('可以接受 direction 属性', () => {
 
   })
-}) 
+})

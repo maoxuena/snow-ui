@@ -37,16 +37,16 @@ describe('Toast', () => {
       }).$mount()
       let closeButton = vm.$el.querySelector('.close')
       expect(closeButton.textContent.trim()).to.eq('关闭吧')
-      setTimeout(()=>{
+      setTimeout(() => {
         closeButton.click()
         expect(callback).to.have.been.called
         done()
-      },200)
+      }, 200)
     })
     it('接受 enableHtml', () => {
       const Constructor = Vue.extend(Toast)
       const vm = new Constructor({
-        propsData: {enableHtml: true}
+        propsData: { enableHtml: true }
       })
       vm.$slots.default = ['<strong id="test">hi</strong>']
       vm.$mount()
@@ -63,4 +63,4 @@ describe('Toast', () => {
       expect(vm.$el.classList.contains('position-bottom')).to.eq(true)
     })
   })
-}) 
+})

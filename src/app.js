@@ -60,17 +60,17 @@ new Vue({
         {
           name: '杭州',
           children: [
-            {name: '上城'},
-            {name: '下城'},
-            {name: '江干'},
+            { name: '上城' },
+            { name: '下城' },
+            { name: '江干' },
           ]
         },
         {
           name: '嘉兴',
           children: [
-            {name: '南湖'},
-            {name: '秀洲'},
-            {name: '嘉善'},
+            { name: '南湖' },
+            { name: '秀洲' },
+            { name: '嘉善' },
           ]
         },
       ]
@@ -80,9 +80,9 @@ new Vue({
         {
           name: '福州',
           children: [
-            {name: '鼓楼'},
-            {name: '台江'},
-            {name: '仓山'},
+            { name: '鼓楼' },
+            { name: '台江' },
+            { name: '仓山' },
           ]
         },
       ]

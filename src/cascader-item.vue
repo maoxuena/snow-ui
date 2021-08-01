@@ -1,45 +1,51 @@
 <template>
-  <div class="cascader-item" :style="{height: height}">
+  <div class="cascader-item"
+       :style="{height: height}">
     <div class="left">
-      <div class="label" v-for="(item,index) in items" 
+      <div class="label"
+           v-for="(item,index) in items"
            :key="index"
            @click="leftSelected = item">
         {{item.name}}
-         <icon class="icon" v-if="item.children" name="right"></icon>
+        <icon class="icon"
+              v-if="item.children"
+              name="right"></icon>
       </div>
     </div>
-    <div class="right" v-if="rightItems">
-      <snow-cascader-item :items="rightItems" :height="height"></snow-cascader-item>
+    <div class="right"
+         v-if="rightItems">
+      <snow-cascader-item :items="rightItems"
+                          :height="height"></snow-cascader-item>
     </div>
   </div>
 </template>
 
 <script>
 import Icon from './icon'
-  export default {
-    name: "SnowCascaderItem",
-    props: {
-      items: {
-        type: Array
-      },
-      height: {
-        type: String
-      }
+export default {
+  name: "SnowCascaderItem",
+  props: {
+    items: {
+      type: Array
     },
-    components: {
-      Icon
-    },
-    data () {
-      return {
-        leftSelected: null
-      }
-    },
-    computed: {
-      rightItems () {
-        return this.leftSelected?.children
-      }
+    height: {
+      type: String
+    }
+  },
+  components: {
+    Icon
+  },
+  data () {
+    return {
+      leftSelected: null
+    }
+  },
+  computed: {
+    rightItems () {
+      return this.leftSelected?.children
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -53,7 +59,7 @@ import Icon from './icon'
 
   .left {
     height: 100%;
-    padding: .3em 0;
+    padding: 0.3em 0;
   }
 
   .right {
@@ -62,7 +68,7 @@ import Icon from './icon'
   }
 
   .label {
-    padding: .3em 1em;
+    padding: 0.3em 1em;
     display: flex;
     align-items: center;
     min-width: 80px;

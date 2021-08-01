@@ -54,7 +54,5 @@ export default {
   }
 }
 </script>
-<style>
-.tabs {
-}
+<style lang="scss" scoped>
 </style> 

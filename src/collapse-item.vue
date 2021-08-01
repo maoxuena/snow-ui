@@ -1,7 +1,7 @@
 <template>
   <div class="collapseItem">
     <div class="title"
-         @click="toggle" 
+         @click="toggle"
          :data-name="name">
       {{title}}
     </div>

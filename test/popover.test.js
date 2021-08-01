@@ -26,7 +26,7 @@ describe('Popover', () => {
     })
     vm.$el.querySelector('button').click()
     vm.$nextTick(() => {
-      const {contentWrapper} = vm.$refs.a.$refs
+      const { contentWrapper } = vm.$refs.a.$refs
       expect(contentWrapper.classList.contains('position-bottom')).to.be.true
       done()
     })
