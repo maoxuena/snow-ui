@@ -1,11 +1,12 @@
 <template>
   <div class="cascader-item"
        :style="{height: height}">
+       <div>selected:{{selected && selected[level] && selected[level].name}} {{level}}</div>
     <div class="left">
       <div class="label"
            v-for="(item,index) in items"
            :key="index"
-           @click="leftSelected = item">
+           @click="onClickLabel(item)">
         {{item.name}}
         <icon class="icon"
               v-if="item.children"
@@ -15,7 +16,10 @@
     <div class="right"
          v-if="rightItems">
       <snow-cascader-item :items="rightItems"
-                          :height="height"></snow-cascader-item>
+                          :height="height"
+                          :level="level+1"
+                          :selected="selected"
+                          @update:selected="onUpdateSelected"></snow-cascader-item>
     </div>
   </div>
 </template>
@@ -30,6 +34,14 @@ export default {
     },
     height: {
       type: String
+    },
+    selected: {
+      type: Array,
+      default: () => []
+    },
+    level: {
+      type: Number,
+      default: 0
     }
   },
   components: {
@@ -37,12 +49,22 @@ export default {
   },
   data () {
     return {
-      leftSelected: null
     }
   },
   computed: {
     rightItems () {
-      return this.leftSelected?.children
+      let currentSelected = this.selected[this.level]
+      return currentSelected?.children
+    }
+  },
+  methods: {
+    onClickLabel(item){
+      let copy = JSON.parse(JSON.stringify(this.selected))
+      copy[this.level] = item
+      this.$emit('update:selected', copy)
+    },
+    onUpdateSelected(newSelected){
+      this.$emit('update:selected', newSelected)
     }
   }
 }

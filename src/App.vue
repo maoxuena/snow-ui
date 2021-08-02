@@ -192,8 +192,11 @@
     </div>
     <p class="title">cascader</p>
     <div class="wrap">
-      <p>联级选择</p>
-      <s-cascader :source="source" popover-height="200px"></s-cascader>
+      <p>联级选择:{{selected}}</p>
+      <s-cascader :source="source" 
+                  popover-height="200px" 
+                  :selected="selected" 
+                  @update:selected="selected = $event"></s-cascader>
       <p>联级选择</p>
     </div>
     <p class="title">button</p>
@@ -253,6 +256,7 @@ export default {
       message: 'hi',
       selectedTab: 'tab1',
       selectedTabSingle: ['1', '3'],
+      selected:[],
       source: [
         {
           name: '浙江',
