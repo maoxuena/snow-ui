@@ -196,14 +196,13 @@
       <p>{{selected && selected[0] && selected[0].name || '空'}}</p>
       <p>{{selected && selected[1] && selected[1].name || '空'}}</p>
       <p>{{selected && selected[2] && selected[2].name || '空'}}</p>
-      <s-cascader :source="source" 
+      <s-cascader :source.sync="source" 
                   popover-height="200px" 
-                  :selected.sync="selected"></s-cascader>
-      <!-- 等价于 -->
-      <!-- <s-cascader :source="source" 
-                  popover-height="200px" 
-                  :selected="selected" 
-                  @update:selected="selected = $event"></s-cascader> -->
+                  :selected.sync="selected"
+                  :load-data="loadData"
+                  @update:source="onUpdateSource"
+                  @update:selected="onUpdateSelected"></s-cascader>
+      <!-- :selected.sync="selected" 等价于 :selected="selected" @update:selected="selected = $event" -->
       <p>联级选择</p>
     </div>
     <p class="title">button</p>
@@ -234,9 +233,22 @@ import CollapseItem from './collapse-item'
 import Cascader from './cascader'
 
 import db from './db'
-function ajax (parentId = 0) {
-  return db.filter((item) => item.parent_id == parentId)
+function ajax1 (parentId = 0, success, fail ) {
+  let result = db.filter((item) => item.parent_id == parentId)
+  let id = setTimeout(()=>{
+    success(result)
+  }, 800)
+  return id
 }
+
+function ajax2 (parentId = 0) {
+    return new Promise((success, fail) => {
+      setTimeout(() => {
+        let result = db.filter((item) => item.parent_id == parentId)
+        success(result)
+      }, 800)
+    })
+  }
 
 export default {
   name: 'App',
@@ -269,10 +281,33 @@ export default {
       selectedTab: 'tab1',
       selectedTabSingle: ['1', '3'],
       selected:[],
-      source: ajax()
+      source: []
     }
   },
+  created(){
+    // ajax1(0, (result)=>{
+    //   this.source = result
+    // })
+    ajax2(0).then((result)=>{
+      this.source = result
+    })
+  },
   methods: {
+    loadData ({id}, updateSource) {
+      ajax2(id).then(result => {
+        updateSource(result) // 回调:把别人传给我的函数调用一下
+      })
+    },
+    xxx(){
+      ajax2(this.selected[0].id).then((result)=>{
+        let lastLevelSelected = this.source.filter(item => item.id === this.selected[0].id)[0]
+        this.$set(lastLevelSelected, 'children', result)
+      })
+    },
+    onUpdateSource () {
+    },
+    onUpdateSelected () {
+    },
     inputChange (e) {
       console.log(e.target.value)
     },
@@ -302,6 +337,26 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+*::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width : 10px;  /*高宽分别对应横竖滚动条的尺寸*/
+  height: 1px;
+}
+
+*::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 10px;
+  box-shadow   : inset 0 0 5px rgba(0, 0, 0, 0.2);
+  background   : #b1b1b1;
+}
+
+*::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  box-shadow   : inset 0 0 5px rgba(0, 0, 0, 0.1);
+  // border-radius: 10px;
+  background   : #ededed;
 }
 
 :root {
