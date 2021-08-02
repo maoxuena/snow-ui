@@ -16,7 +16,7 @@ export default {
       default: false
     },
     name: {
-      type: String | Number,
+      type: [String, Number],
       required: true
     }
   },
