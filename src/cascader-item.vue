@@ -107,6 +107,7 @@ export default {
     align-items: center;
     min-width: 80px;
     cursor: pointer;
+    white-space: nowrap;
 
     &:hover{
       background-color: $grey;
