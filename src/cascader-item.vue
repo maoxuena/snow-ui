@@ -6,9 +6,9 @@
            v-for="(item,index) in items"
            :key="index"
            @click="onClickLabel(item)">
-        {{item.name}}
+        <span class="name">{{item.name}}</span>
         <icon class="icon"
-              v-if="item.children"
+              v-if="rightArrowVisible(item)"
               name="right"></icon>
       </div>
     </div>
@@ -18,6 +18,7 @@
                           :height="height"
                           :level="level+1"
                           :selected="selected"
+                          :loadData="loadData"
                           @update:selected="onUpdateSelected"></snow-cascader-item>
     </div>
   </div>
@@ -41,6 +42,9 @@ export default {
     level: {
       type: Number,
       default: 0
+    },
+    loadData: {
+      type: Function
     }
   },
   components: {
@@ -61,6 +65,9 @@ export default {
     }
   },
   methods: {
+    rightArrowVisible(item){
+      return this.loadData ? !item.isLeaf : item.children
+    },
     onClickLabel(item){
       let copy = JSON.parse(JSON.stringify(this.selected))
       copy[this.level] = item
@@ -99,9 +106,19 @@ export default {
     display: flex;
     align-items: center;
     min-width: 80px;
+    cursor: pointer;
+
+    &:hover{
+      background-color: $grey;
+    }
+
+    .name{
+      margin-right: 2em;
+      user-select: none;
+    }
 
     .icon {
-      margin-left: 1em;
+      margin-left: auto;
       transform: scale(0.5);
     }
   }

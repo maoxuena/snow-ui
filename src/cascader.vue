@@ -10,6 +10,7 @@
                      :items="source"
                      :height="popoverHeight"
                      :selected="selected"
+                     :loadData="loadData"
                      @update:selected="onUpdateSelected"></cascader-item>
     </div>
   </div>
@@ -82,12 +83,10 @@ export default {
       let updateSource = (result) => {
         let copy = JSON.parse(JSON.stringify(this.source))
         let toUpdate = complex(copy, lastItem.id)
-        if(result.length > 0){
-          toUpdate.children = result
-        }        
+        toUpdate.children = result       
         this.$emit('update:source', copy)
       }
-      this.loadData(lastItem, updateSource) // 回调:把别人传给我的函数调用一下
+      this.loadData && this.loadData(lastItem, updateSource) // 回调:把别人传给我的函数调用一下
       // 调回调的时候传一个函数,这个函数理论应该被调用
     }
   }
@@ -118,6 +117,7 @@ export default {
     background: white;
     display: flex;
     margin-top: 6px;
+    z-index: 9;
     @extend .box-shadow;
   }
 }

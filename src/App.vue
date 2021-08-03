@@ -202,6 +202,11 @@
                   :load-data="loadData"
                   @update:source="onUpdateSource"
                   @update:selected="onUpdateSelected"></s-cascader>
+      <s-cascader :source.sync="source1" 
+                  popover-height="200px" 
+                  :selected.sync="selected"
+                  @update:source="onUpdateSource"
+                  @update:selected="onUpdateSelected"></s-cascader>
       <!-- :selected.sync="selected" 等价于 :selected="selected" @update:selected="selected = $event" -->
       <p>联级选择</p>
     </div>
@@ -245,6 +250,13 @@ function ajax2 (parentId = 0) {
     return new Promise((success, fail) => {
       setTimeout(() => {
         let result = db.filter((item) => item.parent_id == parentId)
+        result.forEach(node=>{
+          if(db.filter(item => item.parent_id === node.id).length > 0){
+            node.isLeaf = false
+          }else{
+            node.isLeaf = true
+          }
+        })
         success(result)
       }, 800)
     })
@@ -281,7 +293,31 @@ export default {
       selectedTab: 'tab1',
       selectedTabSingle: ['1', '3'],
       selected:[],
-      source: []
+      source: [],
+      source1:[
+        {
+          name: '浙江',
+          children: [
+            {
+              name: '杭州',
+              children: [{ name: '上城' }, { name: '下城' }, { name: '江干' }],
+            },
+            {
+              name: '嘉兴',
+              children: [{ name: '南湖' }, { name: '秀洲' }, { name: '嘉善' }],
+            },
+          ],
+        },
+        {
+          name: '福建',
+          children: [
+            {
+              name: '福州',
+              children: [{ name: '鼓楼' }, { name: '台江' }, { name: '仓山' }],
+            },
+          ],
+        }
+      ]
     }
   },
   created(){
