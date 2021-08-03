@@ -204,7 +204,7 @@
                   @update:selected="onUpdateSelected"></s-cascader>
       <s-cascader :source.sync="source1" 
                   popover-height="200px" 
-                  :selected.sync="selected"
+                  :selected.sync="selected1"
                   @update:source="onUpdateSource"
                   @update:selected="onUpdateSelected"></s-cascader>
       <!-- :selected.sync="selected" 等价于 :selected="selected" @update:selected="selected = $event" -->
@@ -293,6 +293,7 @@ export default {
       selectedTab: 'tab1',
       selectedTabSingle: ['1', '3'],
       selected:[],
+      selected1:[],
       source: [],
       source1:[
         {

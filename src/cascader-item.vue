@@ -7,9 +7,17 @@
            :key="index"
            @click="onClickLabel(item)">
         <span class="name">{{item.name}}</span>
-        <icon class="icon"
-              v-if="rightArrowVisible(item)"
-              name="right"></icon>
+        <span class="icons">
+          <template v-if="item.name === loadingItem.name">
+            <icon class="loading"
+                  name="loading"></icon>
+          </template>
+          <template v-else>
+            <icon class="arrow" 
+                  v-if="rightArrowVisible(item)"
+                  name="right"></icon>
+          </template>
+        </span>
       </div>
     </div>
     <div class="right"
@@ -19,6 +27,7 @@
                           :level="level+1"
                           :selected="selected"
                           :loadData="loadData"
+                          :loading-item="loadingItem"
                           @update:selected="onUpdateSelected"></snow-cascader-item>
     </div>
   </div>
@@ -45,6 +54,10 @@ export default {
     },
     loadData: {
       type: Function
+    },
+    loadingItem: {
+      type: Object,
+      default: () => ({})
     }
   },
   components: {
@@ -118,9 +131,16 @@ export default {
       user-select: none;
     }
 
-    .icon {
+    .icons {
       margin-left: auto;
-      transform: scale(0.5);
+
+      .arrow{
+        transform: scale(0.5);
+      }
+
+      .loading{
+        animation: spin 2s infinite linear;
+      }
     }
   }
 }
