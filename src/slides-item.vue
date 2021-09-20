@@ -1,0 +1,61 @@
+<template>
+  <transition name="slide">
+    <div class="s-slides-item" v-if="visible" :class="{ reverse }">
+      <slot></slot>
+    </div>
+  </transition>
+</template>
+
+<script>
+export default {
+  props: {
+    name: {
+      type: String,
+      required: true
+    }
+  },
+  data () {
+    return {
+      selected: undefined,
+      reverse: false
+    }
+  },
+  computed: {
+    visible () {
+      return this.selected === this.name
+    }
+  },
+}
+</script>
+
+<style lang="scss" scoped>
+.s-slides-item {
+}
+.slide-leave-active {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.slide-enter-active,
+.slide-leave-active {
+  transition: all .8s;
+}
+.slide-enter {
+  transform: translateX(100%);
+
+  &.reverse {
+    transform: translateX(-100%);
+  }
+}
+.slide-leave-to {
+  transform: translateX(-100%) scale(0.5);
+  opacity: 0;
+
+  &.reverse {
+    transform: translateX(100%) scale(1);
+    opacity: 1;
+  }
+}
+</style>

@@ -193,22 +193,40 @@
     <p class="title">cascader</p>
     <div class="wrap">
       <p>联级选择</p>
-      <p>{{selected && selected[0] && selected[0].name || '空'}}</p>
-      <p>{{selected && selected[1] && selected[1].name || '空'}}</p>
-      <p>{{selected && selected[2] && selected[2].name || '空'}}</p>
-      <s-cascader :source.sync="source" 
-                  popover-height="200px" 
-                  :selected.sync="selected"
-                  :load-data="loadData"
-                  @update:source="onUpdateSource"
-                  @update:selected="onUpdateSelected"></s-cascader>
-      <s-cascader :source.sync="source1" 
-                  popover-height="200px" 
-                  :selected.sync="selected1"
-                  @update:source="onUpdateSource"
-                  @update:selected="onUpdateSelected"></s-cascader>
+      <p>{{ (selected && selected[0] && selected[0].name) || "空" }}</p>
+      <p>{{ (selected && selected[1] && selected[1].name) || "空" }}</p>
+      <p>{{ (selected && selected[2] && selected[2].name) || "空" }}</p>
+      <s-cascader
+        :source.sync="source"
+        popover-height="200px"
+        :selected.sync="selected"
+        :load-data="loadData"
+        @update:source="onUpdateSource"
+        @update:selected="onUpdateSelected"
+      ></s-cascader>
+      <s-cascader
+        :source.sync="source1"
+        popover-height="200px"
+        :selected.sync="selected1"
+        @update:source="onUpdateSource"
+        @update:selected="onUpdateSelected"
+      ></s-cascader>
       <!-- :selected.sync="selected" 等价于 :selected="selected" @update:selected="selected = $event" -->
       <p>联级选择</p>
+    </div>
+    <p class="title">slides</p>
+    <div class="wrap slides">
+      <s-slides :selected.sync="selectedSlides">
+        <s-slides-item name="1">
+          <div class="box box1">1</div>
+        </s-slides-item>
+        <s-slides-item name="2">
+          <div class="box box2">2</div>
+        </s-slides-item>
+        <s-slides-item name="3">
+          <div class="box box3">3</div>
+        </s-slides-item>
+      </s-slides>
     </div>
     <p class="title">button</p>
     <div class="wrap"></div>
@@ -236,31 +254,33 @@ import TabsPane from './tabs-pane'
 import Collapse from './collapse'
 import CollapseItem from './collapse-item'
 import Cascader from './cascader'
+import Slides from './slides'
+import SlidesItem from './slides-item'
 
 import db from './db'
-function ajax1 (parentId = 0, success, fail ) {
+function ajax1 (parentId = 0, success, fail) {
   let result = db.filter((item) => item.parent_id == parentId)
-  let id = setTimeout(()=>{
+  let id = setTimeout(() => {
     success(result)
   }, 800)
   return id
 }
 
 function ajax2 (parentId = 0) {
-    return new Promise((success, fail) => {
-      setTimeout(() => {
-        let result = db.filter((item) => item.parent_id == parentId)
-        result.forEach(node=>{
-          if(db.filter(item => item.parent_id === node.id).length > 0){
-            node.isLeaf = false
-          }else{
-            node.isLeaf = true
-          }
-        })
-        success(result)
-      }, 800)
-    })
-  }
+  return new Promise((success, fail) => {
+    setTimeout(() => {
+      let result = db.filter((item) => item.parent_id == parentId)
+      result.forEach(node => {
+        if (db.filter(item => item.parent_id === node.id).length > 0) {
+          node.isLeaf = false
+        } else {
+          node.isLeaf = true
+        }
+      })
+      success(result)
+    }, 800)
+  })
+}
 
 export default {
   name: 'App',
@@ -284,7 +304,9 @@ export default {
     's-tabs': Tabs,
     's-collapse': Collapse,
     's-collapse-item': CollapseItem,
-    's-cascader': Cascader
+    's-cascader': Cascader,
+    's-slides': Slides,
+    's-slides-item': SlidesItem
   },
   data () {
     return {
@@ -292,10 +314,10 @@ export default {
       message: 'hi',
       selectedTab: 'tab1',
       selectedTabSingle: ['1', '3'],
-      selected:[],
-      selected1:[],
+      selected: [],
+      selected1: [],
       source: [],
-      source1:[
+      source1: [
         {
           name: '浙江',
           children: [
@@ -318,25 +340,26 @@ export default {
             },
           ],
         }
-      ]
+      ],
+      selectedSlides: '1'
     }
   },
-  created(){
+  created () {
     // ajax1(0, (result)=>{
     //   this.source = result
     // })
-    ajax2(0).then((result)=>{
+    ajax2(0).then((result) => {
       this.source = result
     })
   },
   methods: {
-    loadData ({id}, updateSource) {
+    loadData ({ id }, updateSource) {
       ajax2(id).then(result => {
         updateSource(result) // 回调:把别人传给我的函数调用一下
       })
     },
-    xxx(){
-      ajax2(this.selected[0].id).then((result)=>{
+    xxx () {
+      ajax2(this.selected[0].id).then((result) => {
         let lastLevelSelected = this.source.filter(item => item.id === this.selected[0].id)[0]
         this.$set(lastLevelSelected, 'children', result)
       })
@@ -358,7 +381,7 @@ export default {
         enableHtml: true,
         closeButton: {
           text: '知道了',
-          callback(toast) {
+          callback (toast) {
             console.log(toast)
             console.log('ok')
           },
@@ -378,22 +401,22 @@ export default {
 
 *::-webkit-scrollbar {
   /*滚动条整体样式*/
-  width : 10px;  /*高宽分别对应横竖滚动条的尺寸*/
+  width: 10px; /*高宽分别对应横竖滚动条的尺寸*/
   height: 1px;
 }
 
 *::-webkit-scrollbar-thumb {
   /*滚动条里面小方块*/
   border-radius: 10px;
-  box-shadow   : inset 0 0 5px rgba(0, 0, 0, 0.2);
-  background   : #b1b1b1;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  background: #b1b1b1;
 }
 
 *::-webkit-scrollbar-track {
   /*滚动条里面轨道*/
-  box-shadow   : inset 0 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
   // border-radius: 10px;
-  background   : #ededed;
+  background: #ededed;
 }
 
 :root {
@@ -442,6 +465,27 @@ body {
     }
     .footer {
       background-color: #7dbcea;
+    }
+  }
+
+  .slides {
+    margin: 40px;
+
+    .box {
+      width: 100%;
+      height: 200px;
+      background-color: rgb(162, 245, 29);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 36px;
+
+      &.box1 {
+        background-color: lightcoral;
+      }
+      &.box2 {
+        background-color: rgb(83, 121, 245);
+      }
     }
   }
 }
