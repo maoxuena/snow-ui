@@ -40,7 +40,7 @@ export default {
 }
 .slide-enter-active,
 .slide-leave-active {
-  transition: all .8s;
+  transition: all 0.8s;
 }
 .slide-enter {
   transform: translateX(100%);
@@ -50,12 +50,10 @@ export default {
   }
 }
 .slide-leave-to {
-  transform: translateX(-100%) scale(0.5);
-  opacity: 0;
+  transform: translateX(-100%);
 
   &.reverse {
-    transform: translateX(100%) scale(1);
-    opacity: 1;
+    transform: translateX(100%);
   }
 }
 </style>

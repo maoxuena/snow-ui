@@ -1,5 +1,12 @@
 <template>
-  <div class="s-slides" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
+  <div
+    class="s-slides"
+    @mouseenter="onMouseEnter"
+    @mouseleave="onMouseLeave"
+    @touchstart="onTouchStart"
+    @touchmove="onTouchMove"
+    @touchend="onTouchEnd"
+  >
     <div class="s-slides-window" ref="window">
       <div class="s-slides-wrapper">
         <slot></slot>
@@ -33,7 +40,8 @@ export default {
     return {
       childrenLength: 0,
       lastSelectedIndex: undefined,
-      timerId: undefined
+      timerId: undefined,
+      startTouch: undefined
     }
   },
   mounted () {
@@ -47,7 +55,8 @@ export default {
   },
   computed: {
     selectedIndex () {
-      return this.names.indexOf(this.selected) || 0
+      let index = this.names.indexOf(this.selected)
+      return index === -1 ? 0 : index
     },
     names () {
       return this.$children.map(vm => vm.name)
@@ -59,6 +68,34 @@ export default {
     },
     onMouseLeave () {
       this.playAutomatically()
+    },
+    onTouchStart (e) {
+      this.pause()
+      if (e.touches.length > 1) {
+        return
+      }
+      this.startTouch = e.touches[0]
+    },
+    onTouchMove () {
+
+    },
+    onTouchEnd (e) {
+      let endTouch = e.changedTouches[0]
+      let { clientX: x1, clientY: y1 } = this.startTouch
+      let { clientX: x2, clientY: y2 } = endTouch
+      let distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2))
+      let deltaY = Math.abs(y2 - y1)
+      let rate = distance / deltaY
+      if (rate > 2) {
+        if (x2 > x1) {
+          this.select(this.selectedIndex - 1)
+        } else {
+          this.select(this.selectedIndex + 1)
+        }
+      }
+      this.$nextTick(() => {
+        this.playAutomatically()
+      })
     },
     playAutomatically () {
       // setInterval(() => {
@@ -75,15 +112,8 @@ export default {
       }
       let run = () => {
         const index = this.names.indexOf(this.getSelected())
-        let newIndex = index - 1
-        if (newIndex === -1) {
-          newIndex = this.names.length - 1
-        }
-        if (newIndex === this.names.length) {
-          newIndex = 0
-        }
+        let newIndex = index + 1
         this.select(newIndex)
-        newIndex--
         this.timerId = setTimeout(run, 5000)
       }
       this.timerId = setTimeout(run, 5000)
@@ -94,6 +124,12 @@ export default {
     },
     select (index) {
       this.lastSelectedIndex = this.selectedIndex
+      if (index === -1) {
+        index = this.names.length - 1
+      }
+      if (index === this.names.length) {
+        index = 0
+      }
       this.$emit('update:selected', this.names[index])
     },
     getSelected () {
@@ -105,11 +141,13 @@ export default {
       const selected = this.getSelected()
       this.$children.forEach((vm) => {
         let reverse = this.selectedIndex > this.lastSelectedIndex ? false : true
-        if (this.lastSelectedIndex === this.$children.length - 1 && this.selectedIndex === 0) {
-          reverse = false
-        }
-        if (this.lastSelectedIndex === 0 && this.selectedIndex === this.$children.length - 1) {
-          reverse = true
+        if (this.timerId) {
+          if (this.lastSelectedIndex === this.$children.length - 1 && this.selectedIndex === 0) {
+            reverse = false
+          }
+          if (this.lastSelectedIndex === 0 && this.selectedIndex === this.$children.length - 1) {
+            reverse = true
+          }
         }
         vm.reverse = reverse
         this.$nextTick(() => {
@@ -134,9 +172,33 @@ export default {
   }
 
   &-dots {
+    padding: 8px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     > span {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #ddd;
+      margin: 0 8px;
+      font-size: 12px;
+
+      &:hover {
+        cursor: pointer;
+      }
+
       &.active {
-        background-color: #f00;
+        background-color: black;
+        color: #fff;
+
+        &:hover {
+          cursor: default;
+        }
       }
     }
   }

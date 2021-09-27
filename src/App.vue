@@ -341,7 +341,7 @@ export default {
           ],
         }
       ],
-      selectedSlides: '1'
+      selectedSlides: ''
     }
   },
   created () {
